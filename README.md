@@ -1,2 +1,2 @@
 # PyBluesky
- Bluesky.Social AT Protocol API
+ Bluesky.Social AT Protocol API Library
