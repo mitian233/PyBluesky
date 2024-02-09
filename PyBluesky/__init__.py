@@ -6,6 +6,6 @@ __version__ = '0.0.1'
 __author__ = 'Mitian233'
 __license__ = 'MIT'
 
-from pybluesky.server import Server, formatUrl
-from pybluesky.notification import Notification
-from pybluesky.feed import Feed
+from PyBluesky.server import Server, formatUrl
+from PyBluesky.notification import Notification
+from PyBluesky.feed import Feed

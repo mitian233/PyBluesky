@@ -1,5 +1,5 @@
 import requests, json
-from pybluesky.server import BASE_URL
+from PyBluesky.server import BASE_URL
 
 class Notification(object):
     def __init__(self, sessionJson):
@@ -13,4 +13,3 @@ class Notification(object):
         req = requests.get(url,headers=self.httpHeaders)
         json_content = json.loads(req.content)
         return json_content["notifications"]
-

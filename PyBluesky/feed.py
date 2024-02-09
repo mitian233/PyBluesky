@@ -1,6 +1,6 @@
 import json
 import requests
-from pybluesky.server import BASE_URL
+from PyBluesky.server import BASE_URL
 
 class Feed(object):
     def __init__(self, sessionJson):
@@ -14,3 +14,9 @@ class Feed(object):
         req = requests.get(url, headers=self.httpHeaders)
         json_contents = json.loads(req.content)
         return json_contents["feed"]
+
+    def getPosts(self, atpAddress):
+        url = BASE_URL + "app.bsky.feed.getPosts?uris="
+
+    def getPostThread(self, atpAddress):
+        url = BASE_URL + "app.bsky.feed.getPostThread?uri="

@@ -3,9 +3,10 @@ import json
 
 # BASE_URL
 BASE_URL = "https://bsky.social/xrpc/"
+content_type = "application/json"
 
 class Server:
-    def createSession(identifier, password):
+    def createSession(self, identifier, password, base_url = BASE_URL):
         url = BASE_URL + "com.atproto.server.createSession"
         payload = {
             "identifier": identifier,
@@ -15,15 +16,20 @@ class Server:
         req = requests.post(url, data=json.dumps(payload), headers={"Content-Type": content_type})
         content = req.content
         json_content = json.loads(content)
+        self.accessJwt = json_content["accessJwt"]
+        self.refreshJwt = json_content["refreshJwt"]
         return json_content
 
-    def getProfile(handle, accessJwt):
+    def getSession(self):
+        url = BASE_URL + "com.atproto.server.getSession"
+        req = requests.get(url, headers={"Content-Type": content_type, "Authorization": "Bearer " + self.accessJwt})
+
+    def getProfile(self, handle):
         url = BASE_URL + "com.atproto.server.getProfile"
         payload = {
             "handle": handle
         }
-        content_type = "application/json"
-        headers = {"Content-Type": content_type, "Authorization": "Bearer " + accessJwt}
+        headers = {"Content-Type": content_type, "Authorization": "Bearer " + self.accessJwt}
         req = requests.post(url, data=json.dumps(payload), headers=headers)
         content = req.content
         json_content = json.loads(content)
